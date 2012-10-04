@@ -48,7 +48,7 @@ def course_detail(request, course_id):
                             reverse('library.views.lecture_detail', 
                                     args=(c.id,l.id,))
                            )
-        lecture['SDPosterUrl'] = 'http://' + request.get_host() + '/static/images/generic_course_sd.png'
+        lecture['SDPosterUrl'] = c.course_poster_url
         course['lectures'].append(lecture)
 
     return http.HttpResponse(json.dumps(course), 
@@ -93,7 +93,7 @@ def lecture_detail(request, course_id, lecture_id):
     for category in l.course.categories.all():
         lecture['categories'].append( category.category_type )
 
-    lecture['SDPosterUrl'] = 'http://' + request.get_host() + '/static/images/generic_course_sd.png'
+    lecture['SDPosterUrl'] = l.course.course_poster_url
 
     return http.HttpResponse(json.dumps(lecture), 
                              mimetype='application/json')
@@ -122,7 +122,7 @@ def category_detail(request, category_id):
     
     for course in category.course_set.all():
         course_info = {}
-        course_info['id'] = course.id
+        course_info['id'] = str(course.id)
         course_info['title'] = course.title
         course_info['number'] = course.number
         course_info['description'] = course.description
@@ -131,7 +131,7 @@ def category_detail(request, category_id):
                                 reverse('library.views.course_detail', 
                                 args=(course.id,))
                                )
-        course_info['SDPosterUrl'] = 'http://' + request.get_host() + '/static/images/generic_course_sd.png'
+        course_info['SDPosterUrl'] = course.course_poster_url
 
         course_list.append(course_info)
 
@@ -159,7 +159,7 @@ def search(request, search_value):
                                 reverse('library.views.course_detail', 
                                 args=(course.id,))
                                )
-
+        course_info['SDPosterUrl'] = course.course_poster_url
         course_list.append(course_info)
 
     return http.HttpResponse(json.dumps(course_list), 

@@ -21,12 +21,15 @@ class Course(models.Model):
     title = models.CharField(max_length=200)
     number = models.CharField(max_length=20)
     description = models.TextField()
+    lecturer_firstname  = models.CharField('Lecturer Firstname', max_length=100)
+    lecturer_lastname  = models.CharField('Lecturer Lastname', max_length=100)
     content_type = models.CharField('content type', 
                                     choices=CONTENT_TYPE_CHOICES,
                                     max_length=20)
     start_date = models.DateTimeField('date course started')
     end_date = models.DateTimeField('date course ended')
     release_date = models.DateTimeField('release date')
+    course_poster_url = models.CharField('poster URL', max_length=500)
     categories = models.ManyToManyField(Category)
 
     def __unicode__(self):
