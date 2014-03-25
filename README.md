@@ -7,7 +7,7 @@ This is a RESTful webservice producing JSON data to describe coursework availabl
 
 Wrote this API as part of my [Master's Thesis] (https://docs.google.com/file/d/0By_L4DYGXp_fZWg2aUZHazUxQk0/edit?usp=sharing )
 
-Main API Resoruces
+Main API Resources
 ==================
 
 Categories:  Shows a high level grouping of the available courses.
