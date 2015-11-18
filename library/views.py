@@ -21,7 +21,8 @@
 
 from django import http
 from datetime import datetime
-from django.utils import simplejson as json
+#from django.utils import simplejson as json
+import json
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
@@ -48,8 +49,8 @@ def category_list(request):
         category_list.append(category_info)
 
     # Dump the array to JSON and send the response.
-    return http.HttpResponse(json.dumps(category_list), 
-                             mimetype='application/json')
+    return http.HttpResponse(json.dumps(category_list, sort_keys=True,
+                             indent=4, separators=(',', ': '))) 
 
 #   method: category_detail
 #   params: category_id
@@ -80,8 +81,8 @@ def category_detail(request, category_id):
         course_list.append(course_info)
 
     # convert array to JSON and send the response
-    return http.HttpResponse(json.dumps(course_list), 
-                             mimetype='application/json')
+    return http.HttpResponse(json.dumps(course_list, sort_keys=True,
+                             indent=4, separators=(',', ': '))) 
 
 #   method: course_list
 #   params: none
@@ -104,8 +105,10 @@ def course_list(request):
         course_list.append(course_info)
 
     # convert array to JSON and send the response
-    return http.HttpResponse(json.dumps(course_list), 
-                             mimetype='application/json')
+    return http.HttpResponse(json.dumps(course_list, sort_keys=True,
+                             indent=4, separators=(',', ': '))) 
+
+
 
 
 #   method: course_detail
@@ -146,8 +149,8 @@ def course_detail(request, course_id):
         course['lectures'].append(lecture)
 
     # convert hash to JSON and send the response
-    return http.HttpResponse(json.dumps(course), 
-                             mimetype='application/json')
+    return http.HttpResponse(json.dumps(course, sort_keys=True,
+                             indent=4, separators=(',', ': ')))
     
 #   method: lecture_list
 #   params: course_id
@@ -173,8 +176,8 @@ def lecture_list(request, course_id):
         lecture_list.append(lecture_info)
 
     # send it back as JSON
-    return http.HttpResponse(json.dumps(lecture_list), 
-                             mimetype='application/json')
+    return http.HttpResponse(json.dumps(lecture_list, sort_keys=True,
+                             indent=4, separators=(',', ': '))) 
 
 
 
@@ -208,8 +211,8 @@ def lecture_detail(request, course_id, lecture_id):
     lecture['SDPosterUrl'] = l.course.course_poster_url
 
     # Send the JSON response
-    return http.HttpResponse(json.dumps(lecture), 
-                             mimetype='application/json')
+    return http.HttpResponse(json.dumps(lecture, sort_keys=True,
+                             indent=4, separators=(',', ': '))) 
 
 #   method: search
 #   params: search_value
@@ -244,5 +247,5 @@ def search(request, search_value):
         course_list.append(course_info)
 
     # send the JSON response
-    return http.HttpResponse(json.dumps(course_list), 
-                             mimetype='application/json')
+    return http.HttpResponse(json.dumps(course_list, sort_keys=True,
+                             indent=4, separators=(',', ': '))) 
