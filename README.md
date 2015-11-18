@@ -12,10 +12,10 @@ Main API Resources
 
 Categories:  Shows a high level grouping of the available courses.
 
-Working URL: http://sjxm9203.xen.prgmr.com:8080/library/category/
+Working URL: https://evening-forest-8081.herokuapp.com/library/category/
 
 
 Courses: Lists each available course in the system.
 
-Working URL: http://sjxm9203.xen.prgmr.com:8080/library/course/
+Working URL: https://evening-forest-8081.herokuapp.com/library/course/
 
