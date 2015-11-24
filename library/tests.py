@@ -1,16 +1,27 @@
 """
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
+Model tests
 """
 
 from django.test import TestCase
+from django.db import IntegrityError
+from library.models import Category, Course, Lecture
 
+class ModelTests(TestCase):
+    def setUp(self):
+        Category.objects.create(category_type="computer science")
+        category = Category.objects.get(category_type="computer science")
+        Course.objects.create(categories=category)
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+    def test_category_model(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Tests that the category type returns a category
         """
-        self.assertEqual(1 + 1, 2)
+        category = Category.objects.get(category_type="computer science")
+        self.assertEqual(category.category_type, 'computer science')
+
+    def test_duplicate_entry(self):
+        """
+        Tests that we cannot entry duplicate categories
+        """
+        with self.assertRaises(IntegrityError):
+            Category.objects.create(category_type="computer science")
